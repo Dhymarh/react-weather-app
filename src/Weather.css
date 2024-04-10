@@ -1,0 +1,118 @@
+.Weather-app{
+background-image: url('../images/weather-background.jpg');
+    background-size: cover;
+    background-position: center;
+    max-width: 650px;
+    margin: 10px auto;
+    padding: 40px 70px 5px 70px;
+    box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
+    border-radius: 10px;
+}
+
+header {
+    padding-bottom: 30px;
+    padding-left: 25px;
+    border-bottom: 0px solid #f9f7fe;
+}
+
+.search-input {
+    background: grey;
+    filter: opacity(0.4);
+    border: none;
+    width: 80%;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: "Manjari", sans-serif;
+}
+
+.search-input::placeholder {
+    color: white;
+    font-weight: 600;
+}
+
+.search-button {
+    background: grey;
+    border: none;
+    padding: 10px 10px 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: antiquewhite;
+
+}
+
+.search-button:hover {
+    background-color: white;
+    color: grey;
+    border: 1px solid grey;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+main {
+    padding: 30px 0;
+}
+
+.Weather-app-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Weather-app-city {
+    color: antiquewhite;
+    font-size: 50px;
+    font-weight: 700;
+    margin: 10px 0;
+    line-height: 48px;
+}
+
+.Weather-app-details {
+    color: white;
+    opacity: 0.8;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    margin-top: 45px;
+}
+
+strong {
+    color: #f65282;
+    font-weight: 600;
+}
+
+.Weather-app-temperature {
+    display: flex;
+}
+
+.temperature-icon {
+    width: 85px;
+    height: 85px;
+    margin-top: -8px;
+
+}
+
+.temperature-value {
+    font-size: 85px;
+    font-weight: bold;
+    line-height: 85px;
+}
+
+.temperature-degree {
+   position: relative;
+   top: -10px;
+    font-size: 25px;
+}
+
+.Current-conditions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -85px;
+    margin-right: 40px;
+    color: antiquewhite;
+    opacity: 0.8;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
