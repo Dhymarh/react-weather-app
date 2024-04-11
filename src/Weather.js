@@ -3,23 +3,70 @@ import axios from "axios";
 import "./Weather.css";
 
 
+
 export default function Weather(props) {
     const [ready, setReady] = useState(false);
 const [weatherData, setWeatherData] = useState({});
+const [time, setTime ] = useState(' ');
+const [date, setDate ] = useState(' ');
 
     function handleResponse(response){
-        console.log(response.data);
 setWeatherData({
     temperature: response.data.main.temp,
     humidity: response.data.main.humidity,
     wind: response.data.wind.speed,
     city: response.data.name,
-    description:response.data.weather[0].description,
-    date: "Thursday, 11 April 2024",
-   
+    description: response.data.weather[0].description,
+
 });
 
-        setReady(true);
+let  date= new Date(response.data.dt * 1000);
+let days =  [
+    "Sunday",
+    "Monday", 
+    "Tuesday", 
+    "Wednesday", 
+    "Thursday", 
+    "Friday",
+    "Saturday"
+  ];
+  
+  let day = days[date.getDay()];
+   let now = date.getDate();
+
+let months =  [
+    "January",
+    "February", 
+    "March", 
+    "April", 
+    "May", 
+    "June",
+    "July",
+    "August",
+    "September", 
+    "October", 
+    "November", 
+    "December", 
+  ];
+  
+  
+  let month = months[date.getMonth()];
+  let year = date.getFullYear();
+let today = `${day}, ${now} ${month} ${year}`;
+ 
+  let hours = date.getHours();
+  if (hours < 10 ) {   
+     hours = `0${hours}`;
+   }
+ let minutes = date.getMinutes();
+ if (minutes < 10 ) {
+   minutes = `0${minutes}`;
+ }
+ let time = `${hours}: ${minutes}`;
+
+setDate(today);
+ setTime(time);
+setReady(true);
     }
 
     if (ready){
@@ -40,9 +87,12 @@ return(
                 <div>
                     <h1 className="Weather-app-city">{weatherData.city}</h1>
                     <p className="Weather-app-details">
-                        <span id="time">{weatherData.date}</span>
+                        <span id="time">
+                        {date}
+                            </span>
                     <br/>
-                    <span id="today-time">20:22</span>
+                    <span id="today-time">  {time}
+                 </span>
                     <br/>
                     <span id="description" className="text-capitalize">{weatherData.description}</span>
                     <br/>
