@@ -9,7 +9,7 @@ export default function App() {
       <Weather defaultCity="Nigeria"/>
 <footer>This project was coded by {" "}
              <a href="https://github.com/Dhymarh" target="_blank" rel= "noreferrer" > Chidinma Odoh</a>, is {" "}
-             <a href="https://github.com/Dhymarh/react-weather-app" target="_blank" rel= "noreferrer">open-sourced on Github</a>, <a href="https://my-react-weather-app-pi.vercel.app/" target="_blank" rel= "noreferrer">hosted on Vercel.</a>
+             <a href="https://github.com/Dhymarh/react-weather-app" target="_blank" rel= "noreferrer">open-sourced on Github</a> and is <a href="https://my-react-weather-app-pi.vercel.app/" target="_blank" rel= "noreferrer">hosted on Vercel.</a>
         </footer>
     </div>
     </div>
