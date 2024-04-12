@@ -1,7 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
+import { getBackground } from "./Background";
+import Temperature from "./Temperature";
 import "./Weather.css";
 
+const apiKey = "da44c510d29bcd1d39ft328ob6fc208a";
 
 
 export default function Weather(props) {
@@ -9,18 +13,25 @@ export default function Weather(props) {
 const [weatherData, setWeatherData] = useState({});
 const [time, setTime ] = useState(' ');
 const [date, setDate ] = useState(' ');
+const [city, setCity] = useState(props.defaultCity);
+ const [backgroundImage, setBackgroundImage] = useState('');
+ 
+useEffect(() => {
+    search();
+  }, []);
 
     function handleResponse(response){
+        console.log(response.data);
 setWeatherData({
-    temperature: response.data.main.temp,
-    humidity: response.data.main.humidity,
+    temperature: response.data.temperature.current,
+    humidity: response.data.temperature.humidity,
     wind: response.data.wind.speed,
-    city: response.data.name,
-    description: response.data.weather[0].description,
-
+    city: response.data.city,
+   icon: response.data.condition.icon_url,
+    description: response.data.condition.description,
 });
 
-let  date= new Date(response.data.dt * 1000);
+let  date= new Date(response.data.time * 1000);
 let days =  [
     "Sunday",
     "Monday", 
@@ -67,17 +78,39 @@ let today = `${day}, ${now} ${month} ${year}`;
 setDate(today);
  setTime(time);
 setReady(true);
+ setBackgroundImage(getBackground(weatherData.description, date.getHours()));
     }
+
+
+
+function search(){
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+        axios.get(apiUrl).then(handleResponse).catch(error => {
+      console.error('Error fetching weather data:', error);
+      setReady(false);
+        });
+}
+
+
+   function handleSubmit(event){
+    event.preventDefault();
+    search();
+   }
+    
+function updateCity(event){
+    event.preventDefault();
+setCity(event.target.value)
+}
+
 
     if (ready){
 return(
-    <div className="Weather-app">
+    <div className="Weather-app" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <header>
-            <form className="search-form" id="search-form">
-            
-                <input type="search" placeholder="Enter a city...." required className="search-input" autoFocus="on" id="search-input"/>
+            <form className="search-form" onSubmit={handleSubmit}>
+                <input type="search" placeholder="Enter a city...." required className="search-input" autoFocus="on" onChange={updateCity}/>
              
-                <input type="submit" value="Search" className="search-button" id="search-button"/>
+                <input type="submit" value="Search" className="search-button" />
                   
             </form>
         </header>
@@ -87,47 +120,54 @@ return(
                 <div>
                     <h1 className="Weather-app-city">{weatherData.city}</h1>
                     <p className="Weather-app-details">
-                        <span id="time">
+                        <span >
                         {date}
                             </span>
                     <br/>
-                    <span id="today-time">  {time}
+                    <span>  {time}
                  </span>
                     <br/>
-                    <span id="description" className="text-capitalize">{weatherData.description}</span>
+                    <span>{weatherData.description}</span>
                     <br/>
                 </p>
                 </div>
               
 
                <div className="Weather-app-temperature">
-                <div id="icon">{weatherData.iconUrl}</div>
-                <span id="temperature" className="temperature-value">{Math.round(weatherData.temperature)}</span> 
-                <span className="temperature-degree">°C</span>
+                <div >
+                    <img src= {weatherData.icon} alt="Weather Icon" className="temperature-icon" />
+                </div>
+                <Temperature celsius={weatherData.temperature} />
                  </div>
        </div>
 
            <div className="Current-conditions">
             <p>
-                <span >Humidity: <strong id="humidity"> {weatherData.humidity}%</strong></span>
+                <span >Humidity: <strong> {weatherData.humidity}%</strong></span>
                 <br/>
-                <span >Wind: <strong id="wind-speed">{weatherData.wind}km/h</strong></span>
+                <span >Wind: <strong>{weatherData.wind}km/h</strong></span>
             </p>
            </div>       
            
-          
         </main>      
     </div>
 );
-    }else{
-        const apiKey = "62bc298785543e137bc6756e514eb1c3";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
-        axios.get(apiUrl).then(handleResponse);
-
-        return "Loading......."
+}else{
+       search();
+       
+            return (
+            <ThreeDots
+            visible={true}
+     height="80"
+     width="80"
+     color="#ffffff"
+     radius="9"
+     ariaLabel="three-dots-loading"
+     wrapperStyle={{}}
+     wrapperClass=""
+     />);
+     
     }
-    
-
     
 
 }
