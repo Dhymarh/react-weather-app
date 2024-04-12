@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { getBackground } from "./Background";
@@ -16,9 +16,7 @@ const [date, setDate ] = useState(' ');
 const [city, setCity] = useState(props.defaultCity);
  const [backgroundImage, setBackgroundImage] = useState('');
  
-useEffect(() => {
-    search();
-  }, []);
+
 
     function handleResponse(response){
         console.log(response.data);
@@ -78,7 +76,7 @@ let today = `${day}, ${now} ${month} ${year}`;
 setDate(today);
  setTime(time);
 setReady(true);
- setBackgroundImage(getBackground(weatherData.description, date.getHours()));
+ setBackgroundImage(getBackground(response.data.condition.description, date.getHours()));
     }
 
 
