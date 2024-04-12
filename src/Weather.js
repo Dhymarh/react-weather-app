@@ -3,6 +3,7 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { getBackground } from "./Background";
 import Temperature from "./Temperature";
+import Forecast from "./Forecast";
 import "./Weather.css";
 
 const apiKey = "da44c510d29bcd1d39ft328ob6fc208a";
@@ -19,7 +20,6 @@ const [city, setCity] = useState(props.defaultCity);
 
 
     function handleResponse(response){
-        console.log(response.data);
 setWeatherData({
     temperature: response.data.temperature.current,
     humidity: response.data.temperature.humidity,
@@ -148,6 +148,7 @@ return(
            </div>       
            
         </main>      
+        <Forecast icon={weatherData.icon} city={city}/> 
     </div>
 );
 }else{
