@@ -15,7 +15,7 @@ setLoaded(true);
 }
 
 function day(){
-let date = new Date (forecast[0].time * 1000);
+let date = new Date (forecast.time * 1000);
 let day = date.getDay();
 
 let days =  [
