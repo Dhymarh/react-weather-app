@@ -26,7 +26,7 @@ export default function ForecastPreview(props) {
       <div className="Weather-forecast-date">{day()}</div>
        <img src= {props.icon} alt="Weather Icon" className="Weather-forecast-icon" />
       <div className="Weather-forecast-temperatures">
-        <span className="Weather-forecast-temperature">{maxTemperature()}</span>
+        <span className="Weather-forecast-temperature"><strong>{maxTemperature()}</strong></span>
         <span className="Weather-forecast-temperature">{minTemperature()}</span>
       </div>
     </div>
