@@ -6,7 +6,7 @@ import Temperature from "./Temperature";
 import Forecast from "./Forecast";
 import "./Weather.css";
 
-const apiKey = "da44c510d29bcd1d39ft328ob6fc208a";
+const apiKey = "eac360db5fc86ft86450f3693e73o43f";
 
 
 export default function Weather(props) {

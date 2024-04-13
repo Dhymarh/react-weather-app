@@ -123,14 +123,14 @@ color: #f65282;
 
 .Weather-forecast {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 30px;
 }
 
 
 .Weather-forecast-day {
     border-radius: 10px;
-    margin-left: 15px;
+    margin-left: 18px;
     backdrop-filter: blur(3px);
     padding: 10px;
     border-radius: 10px;
